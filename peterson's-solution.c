@@ -17,7 +17,8 @@
 
 int *turn;
 int *interested;
-char *book;
+
+char *book; //variável compartilhada
 
 void err_sys(const char* X);
 
@@ -58,10 +59,9 @@ main()
 void
 enter_region(int process)
 {
-    
     int other;
 
-    other = 1 - process; //como fazer para mais de dois processos?
+    other = 1 - process; 
     interested[process] = TRUE;
     *turn = process;
     printf("... process %d enter_region\n",process);
@@ -72,8 +72,6 @@ enter_region(int process)
         // se eh a vez do processo e hah algum outro processo interessado
         // o prcesso espera nesse loop
     }
-
-
 }
 
 void
