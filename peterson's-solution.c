@@ -38,7 +38,7 @@ main()
         err_sys("mmap failed");
 
     if ((pid = fork()) < 0) err_sys("fork failed");
-    else if (pid == 0) {
+    else if (pid == 0) {  
         for (i = 0; i<LOOP; i++){     // loop auxiliar de tarefa
             enter_region(0);
             *book = "Era uma vez!";
