@@ -31,21 +31,21 @@ main()
 {
     int pid,i;
 
-    if ((turn = mmap(NULL, SIZE_TURN, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED || 
+    if ((turn       = mmap(NULL, SIZE_TURN      , PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED || 
         (interested = mmap(NULL, SIZE_INTERESTED, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED ||
-        (book = mmap(NULL, SIZE_BOOK, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED
+        (book       = mmap(NULL, SIZE_BOOK      , PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED
         )
         err_sys("mmap failed");
 
     if ((pid = fork()) < 0) err_sys("fork failed");
     else if (pid == 0) {
-        for (i = 0; i<LOOP; i++){
+        for (i = 0; i<LOOP; i++){     // loop auxiliar de tarefa
             enter_region(0);
             *book = "Era uma vez!";
             leave_region(0);
         }
     } else {
-        for (i = 0; i<LOOP; i++){
+        for (i = 0; i<LOOP; i++){     // loop auxiliar de tarefa 
             enter_region(1);
             *book = "numa terra distante";
             leave_region(1);
@@ -68,10 +68,13 @@ enter_region(int process)
 
     while (*turn == process && interested[other] == TRUE){
         printf("... process %d waiting!\n",process);
-        sleep(1);
+        // sleep(1);
         // se eh a vez do processo e hah algum outro processo interessado
         // o prcesso espera nesse loop
     }
+    
+    printf("... process %d passed!\n",process);
+
 }
 
 void
