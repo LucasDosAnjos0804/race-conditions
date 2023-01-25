@@ -17,10 +17,6 @@ void sighup();
 
 void err_sys(const char* X);
 
-
-void producer();
-void consumer();
-
 int produce_item();
 void insert_item(int item);
 int remove_item();
@@ -65,7 +61,7 @@ main()
     } else {        // child  / consumer
 
         while (TRUE) {
-            //sleep(1);
+            sleep(1);
             if (*count == 0) {
                 printf("... consumer vai dormir\n");
                 signal(SIGHUP, sighup);
