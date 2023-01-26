@@ -33,7 +33,7 @@ main()
     int pid, item;
 
     if ((buffer = mmap(NULL, SIZE_BUFFER , PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED || 
-        (count  = mmap(NULL, SIZE_COUNT  , PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED)
+        (count  = mmap(NULL, SIZE_COUNT  , PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED )
         err_sys("mmap failed");
     
     if ((pid = fork()) < 0) err_sys("fork error");

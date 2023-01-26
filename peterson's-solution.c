@@ -33,8 +33,7 @@ main()
 
     if ((turn       = mmap(NULL, SIZE_TURN      , PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED || 
         (interested = mmap(NULL, SIZE_INTERESTED, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED ||
-        (book       = mmap(NULL, SIZE_BOOK      , PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED
-        )
+        (book       = mmap(NULL, SIZE_BOOK      , PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED )
         err_sys("mmap failed");
 
     if ((pid = fork()) < 0) err_sys("fork failed");
