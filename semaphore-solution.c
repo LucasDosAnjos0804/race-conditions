@@ -32,20 +32,22 @@ int *buffer;
 int
 main()
 {
+    int pid,item;
+
     if ((buffer    = mmap(NULL, SIZE_BUFFER   , PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED ||
         (sem_mutex = mmap(NULL, SIZE_SEMAPHORE, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED ||
         (sem_empty = mmap(NULL, SIZE_SEMAPHORE, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED ||
-        (sem_full  = mmap(NULL, SIZE_SEMAPHORE, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED)
+        (sem_full  = mmap(NULL, SIZE_SEMAPHORE, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)) == MAP_FAILED )
         err_sys("mmap failed");
-    int pid,item;
 
-    sem_init(sem_mutex,1,INIT_MUTEX); // inicializacoes de semaforos
-    sem_init(sem_empty,1,INIT_EMPTY); // **
-    sem_init(sem_full ,1,INIT_FULL);  // **
+    sem_init(sem_mutex,1,INIT_MUTEX);    // inicializacoes de semaforos
+    sem_init(sem_empty,1,INIT_EMPTY);    // **
+    sem_init(sem_full ,1,INIT_FULL);     // **
 
+     
     if ((pid = fork()) < 0 ) {
         err_sys("fork error");
-        
+
     } else if (pid) {  // parent / producer
         while (TRUE) {
             sleep(1);
