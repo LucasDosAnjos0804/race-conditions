@@ -45,8 +45,8 @@ main()
 
     if ((pid = fork()) < 0 ) {
         err_sys("fork error");
-    } 
-    else if (pid) {  // parent / producer
+        
+    } else if (pid) {  // parent / producer
         while (TRUE) {
             sleep(1);
             item = produce_item();
