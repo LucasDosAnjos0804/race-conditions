@@ -120,7 +120,7 @@ wake_up(int id)
 void
 sighup()
 {
-    signal(SIGHUP,sighup);
+    puts("recebeu um sinal");
 }
 
 void 
